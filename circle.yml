@@ -18,4 +18,7 @@ jobs:
           command: make lint
       - run:
           name: Unit tests
-          command: make test
+          command: make coverage
+      - run:
+          name: Run coveralls
+          command: coveralls
