@@ -15,3 +15,6 @@ Structure of changelog
 
 #### Added
     - Folders mkart, docs and tests to start the project
+
+#### Changed
+    - README file to show badge of docs
