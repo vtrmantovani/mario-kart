@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.6
+    working_directory: "~/mkart/"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}
+            - cache-master
+      - run:
+          name: Install Dependencies
+          command: make requirements-dev
+      - run:
+          name: Run lint
+          command: make lint
+      - run:
+          name: Unit tests
+          command: make test

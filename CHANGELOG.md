@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - CircleCI integration
     - Folders mkart, docs and tests to start the project
 
 #### Changed
