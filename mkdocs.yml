@@ -1,0 +1,7 @@
+site_name: Mario Kart
+site_description: Shows the race result from a log file
+site_author: Vitor Mantovani
+theme: readthedocs
+
+nav:
+    - Home: 'index.md'
