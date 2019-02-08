@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Model Lap
     - Model Driver
     - Coveralls integration
     - CircleCI integration
