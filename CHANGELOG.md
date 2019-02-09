@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Expection service file
     - Model Lap
     - Model Driver
     - Coveralls integration
