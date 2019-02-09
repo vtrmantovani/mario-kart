@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Service File
     - Expection service file
     - Model Lap
     - Model Driver
