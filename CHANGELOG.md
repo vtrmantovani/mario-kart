@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Helpers with methods convert_text_to_lap and _create_driver
     - Expection helper file
     - Utils with methods text_hour_to_milliseconds and text_minutes_to_milliseconds
     - Service File
