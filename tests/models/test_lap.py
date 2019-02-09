@@ -1,5 +1,4 @@
 import unittest
-from datetime import time
 
 from mkart.models.driver import Driver
 from mkart.models.lap import Lap
@@ -19,9 +18,9 @@ class TestLap(unittest.TestCase):
         self.driver = driver
 
     def test_create_lap(self):
-        hour = time(23, 49, 8, 277)
+        hour = 3661001
         number = 1
-        duration = time(0, 1, 2, 852)
+        duration = 60001
         average_speed = 44.275
 
         lap = Lap(

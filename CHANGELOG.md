@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Utils with methods text_hour_to_milliseconds and text_minutes_to_milliseconds
     - Service File
     - Expection service file
     - Model Lap
