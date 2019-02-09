@@ -1,0 +1,2 @@
+class HelperException(Exception):
+    pass
