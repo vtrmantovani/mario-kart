@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Service Position
     - Method milliseconds_to_text on date utils
     - Model Position
     - Helpers with methods convert_text_to_lap and _create_driver

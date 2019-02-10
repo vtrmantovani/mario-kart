@@ -7,15 +7,10 @@ from mkart.models.lap import Lap
 class TestLap(unittest.TestCase):
 
     def setUp(self):
-        super(TestLap, self).setUp()
         self.load_fixtures()
 
     def load_fixtures(self):
-        driver = Driver(1, 'F.MASSA')
-        driver.laps = 1
-        driver.laps = 2
-
-        self.driver = driver
+        self.driver = Driver(1, 'F.MASSA')
 
     def test_create_lap(self):
         hour = 3661001
