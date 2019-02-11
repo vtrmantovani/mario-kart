@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Manager Race
     - Expection manager file
     - Service Position
     - Method milliseconds_to_text on date utils
