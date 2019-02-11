@@ -36,3 +36,6 @@ Structure of changelog
     - Docs to show how run the project
     - Model Driver
     - README file to show badge of docs
+
+#### Fixed
+    - Typo on __main__ file

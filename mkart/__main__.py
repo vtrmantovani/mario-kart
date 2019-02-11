@@ -5,7 +5,7 @@ from mkart.exceptions.manager import ManagerException
 from mkart.manager.race import RaceManager
 
 
-def show_avalibe_commands():
+def show_available_commands():
     print("Available Commands:")
     print(" * mkart -f <file.log> Process race result from a log file")
 
@@ -15,7 +15,7 @@ def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "h:f:", ["file="])
     except getopt.GetoptError:
-        show_avalibe_commands()
+        show_available_commands()
         sys.exit()
 
     for opt, arg in opts:
@@ -31,7 +31,7 @@ def main():
                 print(e)
             sys.exit()
 
-    show_avalibe_commands()
+    show_available_commands()
     sys.exit()
 
 
