@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Main file to show results
     - Manager Race
     - Expection manager file
     - Service Position
