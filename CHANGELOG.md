@@ -32,5 +32,6 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Docs to show how run the project
     - Model Driver
     - README file to show badge of docs
