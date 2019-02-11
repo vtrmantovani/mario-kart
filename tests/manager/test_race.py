@@ -24,8 +24,9 @@ class TestManagerRace(unittest.TestCase):
 
         self.driver = driver
 
+    @mock.patch('mkart.services.file.FileService._check_file_exists')
     @mock.patch('mkart.services.file.FileService.get_lines')
-    def test_get_lines_file(self, mock_s_file):
+    def test_get_lines_file(self, mock_s_file, mock_s_check):
         mock_s_file.return_value = ['23:49:08.277']
         race_manager = RaceManager('a.log')
         result = race_manager._get_lines_file()

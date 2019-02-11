@@ -17,8 +17,8 @@ class TestServiceFile(unittest.TestCase):
         self.assertEquals(result[0], 'line 1')
 
     def test_get_lines_with_file_not_found(self):
-        file = FileService(self.fixtures_path + '/file_not_found.log')
         with self.assertRaises(ServiceException) as error:
+            file = FileService(self.fixtures_path + '/file_not_found.log')
             file.get_lines()
 
         self.assertEqual(str(error.exception), 'File not found')

@@ -32,6 +32,7 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Service File to check file on instace of class
     - Separating requirements dev from test
     - Docs to show how run the project
     - Model Driver
