@@ -12,7 +12,7 @@ jobs:
             - cache-master
       - run:
           name: Install Dependencies
-          command: make requirements-dev
+          command: make requirements-test
       - run:
           name: Run lint
           command: make lint

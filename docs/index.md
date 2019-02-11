@@ -60,12 +60,25 @@ Velocidade média da volta (Average lap speed)
 
 ## Run the tests
 
-1. Install the Python dependencies:
+1.  Create a virtualenv with python 3.6:
+
     ```
-    make requirements-dev
+    virtualenv -p python3 .venv
     ```
 
-2. Run the command:
+2.  Active the virtualenv:
+
+    ```
+    source .venv/bin/activate
+    ```
+
+3. Install the Python dependencies:
+
+    ```
+    make requirements-test
+    ```
+
+4. Run the command:
 
     ```
     make test

@@ -17,6 +17,9 @@ coverage: clean
 requirements-dev:
 	pip install -r requirements-dev.txt
 
+requirements-test:
+	pip install -r requirements-test.txt
+
 lint: flake8 check-python-import
 
 flake8:
