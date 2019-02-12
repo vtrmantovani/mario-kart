@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Method show_best_drivers_lap on race manager
     - Main file to show results
     - Manager Race
     - Expection manager file

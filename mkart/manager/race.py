@@ -29,6 +29,12 @@ class RaceManager:
         position_service = PositionService(laps)
         return position_service.get_positions()
 
+    def _get_best_drivers_lap(self):
+        lines = self._get_lines_file()
+        laps = self._get_laps(lines)
+        lap_service = LapService(laps)
+        return lap_service.get_best_drivers_lap()
+
     def show_result(self):
         try:
             last_laps = self._get_last_laps_duration()
@@ -41,6 +47,19 @@ class RaceManager:
                     position.driver.name,
                     position.finished_laps,
                     milliseconds_to_text(position.duration)
+                ))
+        except ServiceException as e:
+            raise ManagerException(e)
+
+    def show_best_drivers_lap(self):
+        try:
+            best_drivers_lap = self._get_best_drivers_lap()
+            for lap in best_drivers_lap:
+                print('{} {} {} {}'.format(
+                    lap.driver.id,
+                    lap.driver.name,
+                    lap.number,
+                    milliseconds_to_text(lap.duration)
                 ))
         except ServiceException as e:
             raise ManagerException(e)

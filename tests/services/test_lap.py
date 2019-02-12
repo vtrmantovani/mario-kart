@@ -44,7 +44,7 @@ class TestServiceLap(unittest.TestCase):
 
         self.laps = [self.lap_1, self.lap_2, self.lap_4, self.lap_3]
         self.drive_1_laps = [self.lap_1, self.lap_4]
-        self.drive_1_laps_s = [self.lap_4, self.lap_1]
+        self.drive_1_laps_sorted = [self.lap_4, self.lap_1]
 
     def test_get_drivers_id(self):
         lap_service = LapService(self.laps)
@@ -58,12 +58,12 @@ class TestServiceLap(unittest.TestCase):
 
     def test_get_last_driver_laps(self):
         lap_service = LapService(self.laps)
-        result = lap_service._get_last_driver_laps(self.drive_1_laps_s)
+        result = lap_service._get_last_driver_laps(self.drive_1_laps_sorted)
         self.assertEquals(result, self.lap_4)
 
     def test_get_race_duration_of_driver(self):
         lap_service = LapService(self.laps)
-        result = lap_service._get_race_duration_of_driver(self.drive_1_laps_s)  # noqa
+        result = lap_service._get_race_duration_of_driver(self.drive_1_laps_sorted)  # noqa
         self.assertEquals(result, self.lap_4.duration + self.lap_1.duration)
 
     def test_get_last_laps_duration(self):
@@ -77,3 +77,23 @@ class TestServiceLap(unittest.TestCase):
         self.assertEquals(result[0]['lap'], self.lap_4)
         self.assertEquals(result[1]['duration'], duration_2)
         self.assertEquals(result[1]['lap'], self.lap_3)
+
+    def test_get_best_lap(self):
+        lap_service = LapService(self.laps)
+        result = lap_service._get_best_lap(self.drive_1_laps)  # noqa
+        self.assertEquals(result.driver.id, self.lap_1.driver.id)
+        self.assertEquals(result.driver.name, self.lap_1.driver.name)
+        self.assertEquals(result.number, self.lap_1.number)
+        self.assertEquals(result.duration, self.lap_1.duration)
+
+    def test_get_best_drivers_lap(self):
+        lap_service = LapService(self.laps)
+        result = lap_service.get_best_drivers_lap()
+        self.assertEquals(result[0].driver.id, self.lap_2.driver.id)
+        self.assertEquals(result[0].driver.name, self.lap_2.driver.name)
+        self.assertEquals(result[0].number, self.lap_2.number)
+        self.assertEquals(result[0].duration, self.lap_2.duration)
+        self.assertEquals(result[1].driver.id, self.lap_1.driver.id)
+        self.assertEquals(result[1].driver.name, self.lap_1.driver.name)
+        self.assertEquals(result[1].number, self.lap_1.number)
+        self.assertEquals(result[1].duration, self.lap_1.duration)

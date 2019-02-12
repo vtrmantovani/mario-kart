@@ -18,11 +18,14 @@ class TestManagerRace(unittest.TestCase):
         self.load_fixtures()
 
     def load_fixtures(self):
-        driver = Driver(1, 'F.MASSA')
-        driver.laps = 1
-        driver.laps = 2
+        self.driver = Driver(1, 'F.MASSA')
 
-        self.driver = driver
+        self.lap = Lap(
+            3661001,
+            1,
+            60001,
+            44.275,
+            self.driver)
 
     @mock.patch('mkart.services.file.FileService._check_file_exists')
     @mock.patch('mkart.services.file.FileService.get_lines')
@@ -51,6 +54,11 @@ class TestManagerRace(unittest.TestCase):
         result = race_manager._get_positions([])
         self.assertEqual(type(result[0]), Position)
 
+    def test_get_best_drivers_lap(self):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        result = race_manager._get_best_drivers_lap()
+        self.assertEqual(type(result[0]), Lap)
+
     @mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_show_result(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
@@ -61,5 +69,18 @@ class TestManagerRace(unittest.TestCase):
         with self.assertRaises(ManagerException) as error:
             race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
             race_manager.show_result()
+
+        self.assertEqual(str(error.exception), 'File is empty')
+
+    @mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_show_best_drivers_lap(self, mock_stdout):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        race_manager.show_best_drivers_lap()
+        self.assertEqual(mock_stdout.getvalue(), '033 R.BARRICHELLO 1 0:01:04.352000\n038 MARIO 1 0:01:02.852000\n')  # noqa
+
+    def test_show_best_drivers_lap_with_expection(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
+            race_manager.show_best_drivers_lap()
 
         self.assertEqual(str(error.exception), 'File is empty')

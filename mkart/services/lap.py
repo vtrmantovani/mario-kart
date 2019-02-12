@@ -20,6 +20,10 @@ class LapService:
         durations_of_laps = [lap.duration for lap in laps]
         return reduce((lambda x, y: x + y), durations_of_laps)
 
+    def _get_best_lap(self, laps):
+        laps.sort(key=lambda lap: lap.duration)
+        return laps[0]
+
     def get_last_laps_duration(self):
         last_laps = []
         drivers_ids = self._get_drivers_id()
@@ -32,3 +36,13 @@ class LapService:
 
         last_laps.sort(key=lambda x: x['duration'])
         return last_laps
+
+    def get_best_drivers_lap(self):
+        drivers_best_lap = []
+        drivers_ids = self._get_drivers_id()
+        for id in drivers_ids:
+            driver_laps = self._get_driver_laps(id)
+            best_lap = self._get_best_lap(driver_laps)
+            drivers_best_lap.append(best_lap)
+
+        return drivers_best_lap
