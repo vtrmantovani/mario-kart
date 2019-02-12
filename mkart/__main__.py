@@ -24,6 +24,11 @@ def show_test_best_driver_lap():
     print("=======BEST DRIVERS LAP=======")
 
 
+def show_test_best_lap_of_race_lap():
+    print("\n")
+    print("=======BEST LAP OF RACE=======")
+
+
 def main():
 
     try:
@@ -46,6 +51,10 @@ def main():
 
                 show_test_best_driver_lap()
                 race_manager.show_best_drivers_lap()
+                show_text_line_break()
+
+                show_test_best_lap_of_race_lap()
+                race_manager.show_best_lap_of_race()
                 show_text_line_break()
 
             except ManagerException as e:
