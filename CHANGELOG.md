@@ -34,6 +34,7 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Model Driver to to have the average_speed as an attribute
     - Main file to show best lap of race
     - Main file to show best drivers lap
     - Refactor Service Position to create Service Lap
