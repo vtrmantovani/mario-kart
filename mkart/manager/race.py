@@ -19,10 +19,13 @@ class RaceManager:
     def _get_laps(self, lines):
         return list(map(convert_text_to_lap, lines))
 
-    def _get_last_laps_duration(self):
+    def _get_lap_service(self):
         lines = self._get_lines_file()
         laps = self._get_laps(lines)
-        lap_service = LapService(laps)
+        return LapService(laps)
+
+    def _get_last_laps_duration(self):
+        lap_service = self._get_lap_service()
         return lap_service.get_last_laps_duration()
 
     def _get_positions(self, laps):
@@ -30,10 +33,16 @@ class RaceManager:
         return position_service.get_positions()
 
     def _get_best_drivers_lap(self):
-        lines = self._get_lines_file()
-        laps = self._get_laps(lines)
-        lap_service = LapService(laps)
+        lap_service = self._get_lap_service()
         return lap_service.get_best_drivers_lap()
+
+    def _get_best_lap_of_race(self):
+        lap_service = self._get_lap_service()
+        return lap_service.get_best_lap_of_race()
+
+    def _get_drivers_average_speed(self):
+        lap_service = self._get_lap_service()
+        return lap_service.get_drivers_average_speed()
 
     def show_result(self):
         try:
@@ -66,14 +75,23 @@ class RaceManager:
 
     def show_best_lap_of_race(self):
         try:
-            lines = self._get_lines_file()
-            laps = self._get_laps(lines)
-            lap_service = LapService(laps)
-            best_lap = lap_service.get_best_lap_of_race()
+            best_lap = self._get_best_lap_of_race()
             print('{} {} {}'.format(
                 best_lap.driver.id,
                 best_lap.driver.name,
                 milliseconds_to_text(best_lap.duration)
             ))
+        except ServiceException as e:
+            raise ManagerException(e)
+
+    def show_drivers_average_speed(self):
+        try:
+            average_speed_drivers = self._get_drivers_average_speed()
+            for drive in average_speed_drivers:
+                print('{} {} {}'.format(
+                    drive.id,
+                    drive.name,
+                    "{0:.3f}".format(round(drive.average_speed, 3))
+                ))
         except ServiceException as e:
             raise ManagerException(e)

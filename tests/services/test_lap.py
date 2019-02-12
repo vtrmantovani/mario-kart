@@ -105,3 +105,18 @@ class TestServiceLap(unittest.TestCase):
         self.assertEquals(result.driver.name, self.lap_1.driver.name)
         self.assertEquals(result.number, self.lap_1.number)
         self.assertEquals(result.duration, self.lap_1.duration)
+
+    def test_get_average_speed_of_laps(self):
+        lap_service = LapService(self.laps)
+        result = lap_service._get_average_speed_of_laps(self.laps)
+        self.assertEquals(result, 44.275)
+
+    def test_get_drivers_average_speed(self):
+        lap_service = LapService(self.laps)
+        result = lap_service.get_drivers_average_speed()
+        self.assertEquals(result[0].id, self.driver_2.id)
+        self.assertEquals(result[0].name, self.driver_2.name)
+        self.assertEquals(result[0].average_speed, 44.275)
+        self.assertEquals(result[1].id, self.driver.id)
+        self.assertEquals(result[1].name, self.driver.name)
+        self.assertEquals(result[1].average_speed, 44.275)

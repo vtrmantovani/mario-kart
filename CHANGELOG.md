@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Method show_drivers_average_speed on race manager
     - Method show_best_lap_of_race on race manager
     - Method show_best_drivers_lap on race manager
     - Main file to show results

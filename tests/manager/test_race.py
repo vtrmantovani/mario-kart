@@ -9,6 +9,7 @@ from mkart.manager.race import RaceManager
 from mkart.models.driver import Driver
 from mkart.models.lap import Lap
 from mkart.models.position import Position
+from mkart.services.lap import LapService
 
 
 class TestManagerRace(unittest.TestCase):
@@ -41,6 +42,11 @@ class TestManagerRace(unittest.TestCase):
         race_manager = RaceManager('a.log')
         result = race_manager._get_laps(lines)
         self.assertEqual(type(result[0]), Lap)
+
+    def get_lap_service(self):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        result = race_manager._get_lap_service()
+        self.assertEqual(type(result), LapService)
 
     @mock.patch('mkart.services.position.PositionService.get_positions')
     def test_get_positions(self, mock_s_position):
@@ -85,6 +91,11 @@ class TestManagerRace(unittest.TestCase):
 
         self.assertEqual(str(error.exception), 'File is empty')
 
+    def test_get_best_lap_of_race(self):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        result = race_manager._get_best_lap_of_race()
+        self.assertEqual(type(result), Lap)
+
     @mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_show_best_lap_of_race(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
@@ -95,5 +106,23 @@ class TestManagerRace(unittest.TestCase):
         with self.assertRaises(ManagerException) as error:
             race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
             race_manager.show_best_lap_of_race()
+
+        self.assertEqual(str(error.exception), 'File is empty')
+
+    def test_get_drivers_average_speed(self):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        result = race_manager._get_drivers_average_speed()
+        self.assertEqual(type(result[0]), Driver)
+
+    @mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_show_drivers_average_speed(self, mock_stdout):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        race_manager.show_drivers_average_speed()
+        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 44.275\n033 R.BARRICHELLO 43.243\n')  # noqa
+
+    def test_show_drivers_average_speed_with_expection(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
+            race_manager.show_drivers_average_speed()
 
         self.assertEqual(str(error.exception), 'File is empty')
