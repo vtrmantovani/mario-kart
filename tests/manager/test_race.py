@@ -76,11 +76,24 @@ class TestManagerRace(unittest.TestCase):
     def test_show_best_drivers_lap(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_best_drivers_lap()
-        self.assertEqual(mock_stdout.getvalue(), '033 R.BARRICHELLO 1 0:01:04.352000\n038 MARIO 1 0:01:02.852000\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1 0:01:02.852000\n033 R.BARRICHELLO 1 0:01:04.352000\n')  # noqa
 
     def test_show_best_drivers_lap_with_expection(self):
         with self.assertRaises(ManagerException) as error:
             race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
             race_manager.show_best_drivers_lap()
+
+        self.assertEqual(str(error.exception), 'File is empty')
+
+    @mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_show_best_lap_of_race(self, mock_stdout):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        race_manager.show_best_lap_of_race()
+        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 0:01:02.852000\n')  # noqa
+
+    def test_show_best_lap_of_race_with_expection(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
+            race_manager.show_best_lap_of_race()
 
         self.assertEqual(str(error.exception), 'File is empty')

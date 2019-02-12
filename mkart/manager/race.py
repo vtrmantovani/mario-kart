@@ -63,3 +63,17 @@ class RaceManager:
                 ))
         except ServiceException as e:
             raise ManagerException(e)
+
+    def show_best_lap_of_race(self):
+        try:
+            lines = self._get_lines_file()
+            laps = self._get_laps(lines)
+            lap_service = LapService(laps)
+            best_lap = lap_service.get_best_lap_of_race()
+            print('{} {} {}'.format(
+                best_lap.driver.id,
+                best_lap.driver.name,
+                milliseconds_to_text(best_lap.duration)
+            ))
+        except ServiceException as e:
+            raise ManagerException(e)

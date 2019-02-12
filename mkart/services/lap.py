@@ -45,4 +45,8 @@ class LapService:
             best_lap = self._get_best_lap(driver_laps)
             drivers_best_lap.append(best_lap)
 
+        drivers_best_lap.sort(key=lambda x: x.duration)
         return drivers_best_lap
+
+    def get_best_lap_of_race(self):
+        return self._get_best_lap(self._laps)
