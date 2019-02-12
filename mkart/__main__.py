@@ -29,6 +29,11 @@ def show_test_best_lap_of_race_lap():
     print("=======BEST LAP OF RACE=======")
 
 
+def show_test_drivers_average_speed():
+    print("\n")
+    print("=====DRIVERS AVERAGE SPEED=====")
+
+
 def main():
 
     try:
@@ -55,6 +60,10 @@ def main():
 
                 show_test_best_lap_of_race_lap()
                 race_manager.show_best_lap_of_race()
+                show_text_line_break()
+
+                show_test_drivers_average_speed()
+                race_manager.show_drivers_average_speed()
                 show_text_line_break()
 
             except ManagerException as e:

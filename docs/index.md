@@ -72,6 +72,16 @@ Velocidade média da volta (Average lap speed)
 =======BEST LAP OF RACE=======
 038 F.MASSA 0:01:02.769000
 ===============================
+
+
+=====DRIVERS AVERAGE SPEED=====
+038 F.MASSA 44.246
+002 K.RAIKKONEN 43.627
+033 R.BARRICHELLO 43.468
+023 M.WEBBER 43.191
+015 F.ALONSO 38.066
+011 S.VETTEL 25.746
+===============================
 ```
  
 
