@@ -10,6 +10,20 @@ def show_available_commands():
     print(" * mkart -f <file.log> Process race result from a log file")
 
 
+def show_text_line_break():
+    print("===============================")
+
+
+def show_text_result():
+    print("\n")
+    print("======RESULT OF KART RACE======")
+
+
+def show_test_best_driver_lap():
+    print("\n")
+    print("=======BEST DRIVERS LAP=======")
+
+
 def main():
 
     try:
@@ -25,7 +39,14 @@ def main():
         elif opt in ("-f", "--file"):
             try:
                 race_manager = RaceManager(arg)
+
+                show_text_result()
                 race_manager.show_result()
+                show_text_line_break()
+
+                show_test_best_driver_lap()
+                race_manager.show_best_drivers_lap()
+                show_text_line_break()
 
             except ManagerException as e:
                 print(e)

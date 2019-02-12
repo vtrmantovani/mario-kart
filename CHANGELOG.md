@@ -33,6 +33,7 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Main file to show best drivers lap
     - Refactor Service Position to create Service Lap
     - Service File to check file on instace of class
     - Separating requirements dev from test
