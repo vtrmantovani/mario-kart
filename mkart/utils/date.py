@@ -25,4 +25,5 @@ def text_minutes_to_milliseconds(value):
 
 
 def milliseconds_to_text(value):
-    return str(timedelta(milliseconds=value))
+    text = str(timedelta(milliseconds=value))
+    return text[3:-3]

@@ -14,6 +14,6 @@ class TestUtilsDate(unittest.TestCase):
         result = text_minutes_to_milliseconds('1:00.1')
         self.assertEquals(result, 60001)
 
-    def test_milliseconds_to_texte(self):
+    def test_milliseconds_to_text(self):
         result = milliseconds_to_text(60001)
-        self.assertEquals(result, '0:01:00.001000')
+        self.assertEquals(result, '1:00.001')

@@ -35,6 +35,7 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Method milliseconds_to_text on date utils to show duration like log
     - Main file to show drivers average speed lap of race
     - Model Driver to to have the average_speed as an attribute
     - Main file to show best lap of race

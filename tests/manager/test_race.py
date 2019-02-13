@@ -69,7 +69,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_result(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_result()
-        self.assertEqual(mock_stdout.getvalue(), '1 038 MARIO 1 0:01:02.852000\n2 033 R.BARRICHELLO 1 0:01:04.352000\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '1 038 MARIO 1 1:02.852\n2 033 R.BARRICHELLO 1 1:04.352\n')  # noqa
 
     def test_show_result_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -82,7 +82,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_best_drivers_lap(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_best_drivers_lap()
-        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1 0:01:02.852000\n033 R.BARRICHELLO 1 0:01:04.352000\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1 1:02.852\n033 R.BARRICHELLO 1 1:04.352\n')  # noqa
 
     def test_show_best_drivers_lap_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -100,7 +100,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_best_lap_of_race(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_best_lap_of_race()
-        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 0:01:02.852000\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1:02.852\n')  # noqa
 
     def test_show_best_lap_of_race_with_expection(self):
         with self.assertRaises(ManagerException) as error:
