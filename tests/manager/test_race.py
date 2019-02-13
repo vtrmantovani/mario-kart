@@ -67,7 +67,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_result(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_result()
-        self.assertEqual(mock_stdout.getvalue(), '1 038 MARIO 1 1:02.852\n2 033 R.BARRICHELLO 1 1:04.352\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '1 038-MARIO 1 1:02.852\n2 033-R.BARRICHELLO 1 1:04.352\n')  # noqa
 
     def test_show_result_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -80,7 +80,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_best_drivers_lap(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_best_drivers_lap()
-        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1 1:02.852\n033 R.BARRICHELLO 1 1:04.352\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038-MARIO 1 1:02.852\n033-R.BARRICHELLO 1 1:04.352\n')  # noqa
 
     def test_show_best_drivers_lap_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -98,7 +98,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_best_lap_of_race(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_best_lap_of_race()
-        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 1:02.852\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038-MARIO 1:02.852\n')  # noqa
 
     def test_show_best_lap_of_race_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -116,7 +116,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_drivers_average_speed(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_drivers_average_speed()
-        self.assertEqual(mock_stdout.getvalue(), '038 MARIO 44.275\n033 R.BARRICHELLO 43.243\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '038-MARIO 44.275\n033-R.BARRICHELLO 43.243\n')  # noqa
 
     def test_show_drivers_average_speed_with_expection(self):
         with self.assertRaises(ManagerException) as error:
@@ -140,7 +140,7 @@ class TestManagerRace(unittest.TestCase):
     def test_show_time_drivers_after_winner(self, mock_stdout):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         race_manager.show_time_drivers_after_winner()
-        self.assertEqual(mock_stdout.getvalue(), '033 R.BARRICHELLO 1 0:01.500\n')  # noqa
+        self.assertEqual(mock_stdout.getvalue(), '033-R.BARRICHELLO 1 0:01.500\n')  # noqa
 
     def test_show_time_drivers_after_winner_with_expection(self):
         with self.assertRaises(ManagerException) as error:

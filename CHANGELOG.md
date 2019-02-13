@@ -36,6 +36,7 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Main file to show labels of results
     - Main file to show time drivers after winner of race
     - Model Position to have the delay_after_winner as an attribute
     - Method milliseconds_to_text on date utils to show duration like log

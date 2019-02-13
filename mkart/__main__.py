@@ -17,26 +17,31 @@ def show_text_line_break():
 def show_text_result():
     print("\n")
     print("======RESULT OF KART RACE======")
+    print("POSITION - DRIVER - FINISHED LAPS - DURATION")
 
 
 def show_test_best_driver_lap():
     print("\n")
     print("=======BEST DRIVERS LAP=======")
+    print("DRIVER - LAP - DURATION")
 
 
 def show_test_best_lap_of_race_lap():
     print("\n")
     print("=======BEST LAP OF RACE=======")
+    print("DRIVER - DURATION")
 
 
 def show_test_drivers_average_speed():
     print("\n")
     print("=====DRIVERS AVERAGE SPEED=====")
+    print("DRIVER - AVERAGE SPEED")
 
 
 def show_text_time_drivers_after_winner():
     print("\n")
     print("====TIME DRIVERS AFTER WINER====")
+    print("DRIVER - FINISHED LAPS - TIME")
 
 
 def main():

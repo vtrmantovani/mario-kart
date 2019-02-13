@@ -54,7 +54,7 @@ class RaceManager:
             positions = self._get_positions(last_laps)
 
             for position in positions:
-                print('{} {} {} {} {}'.format(
+                print('{} {}-{} {} {}'.format(
                     position.number,
                     position.driver.id,
                     position.driver.name,
@@ -68,7 +68,7 @@ class RaceManager:
         try:
             best_drivers_lap = self._get_best_drivers_lap()
             for lap in best_drivers_lap:
-                print('{} {} {} {}'.format(
+                print('{}-{} {} {}'.format(
                     lap.driver.id,
                     lap.driver.name,
                     lap.number,
@@ -80,7 +80,7 @@ class RaceManager:
     def show_best_lap_of_race(self):
         try:
             best_lap = self._get_best_lap_of_race()
-            print('{} {} {}'.format(
+            print('{}-{} {}'.format(
                 best_lap.driver.id,
                 best_lap.driver.name,
                 milliseconds_to_text(best_lap.duration)
@@ -92,7 +92,7 @@ class RaceManager:
         try:
             average_speed_drivers = self._get_drivers_average_speed()
             for drive in average_speed_drivers:
-                print('{} {} {}'.format(
+                print('{}-{} {}'.format(
                     drive.id,
                     drive.name,
                     "{0:.3f}".format(round(drive.average_speed, 3))
@@ -105,7 +105,7 @@ class RaceManager:
             last_laps = self._get_last_laps_duration()
             drivers_position_after_winner = self._get_drivers_lap_after_winner(last_laps)  # noqa
             for position in drivers_position_after_winner:
-                print('{} {} {} {}'.format(
+                print('{}-{} {} {}'.format(
                     position.driver.id,
                     position.driver.name,
                     position.finished_laps,
