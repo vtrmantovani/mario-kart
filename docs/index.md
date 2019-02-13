@@ -82,6 +82,17 @@ Velocidade média da volta (Average lap speed)
 015 F.ALONSO 38.066
 011 S.VETTEL 25.746
 ===============================
+
+
+====TIME DRIVERS AFTER WINER====
+002 K.RAIKKONEN 4 0:03.575
+033 R.BARRICHELLO 4 0:04.502
+023 M.WEBBER 4 0:06.144
+015 F.ALONSO 4 0:42.643
+011 S.VETTEL 3 6:27.276
+===============================
+
+
 ```
  
 

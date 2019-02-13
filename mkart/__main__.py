@@ -34,6 +34,11 @@ def show_test_drivers_average_speed():
     print("=====DRIVERS AVERAGE SPEED=====")
 
 
+def show_text_time_drivers_after_winner():
+    print("\n")
+    print("====TIME DRIVERS AFTER WINER====")
+
+
 def main():
 
     try:
@@ -64,6 +69,10 @@ def main():
 
                 show_test_drivers_average_speed()
                 race_manager.show_drivers_average_speed()
+                show_text_line_break()
+
+                show_text_time_drivers_after_winner()
+                race_manager.show_time_drivers_after_winner()
                 show_text_line_break()
 
             except ManagerException as e:
