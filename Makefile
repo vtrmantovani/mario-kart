@@ -1,3 +1,6 @@
+VERSION := 0.0.0
+
+
 clean:
 	@find . -name "*.pyc" | xargs rm -rf
 	@find . -name "*.pyo" | xargs rm -rf
@@ -36,3 +39,12 @@ outdated:
 
 run-docs:
 	mkdocs serve
+
+release-patch:
+	bumpversion patch
+
+release-minor:
+	bumpversion minor
+
+release-major:
+	bumpversion major

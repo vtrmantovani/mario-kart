@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - Bumpversion to manager version of project
     - Method show_time_drivers_after_winner on race manager
     - Method show_drivers_average_speed on race manager
     - Method show_best_lap_of_race on race manager
