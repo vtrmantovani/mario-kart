@@ -44,6 +44,10 @@ class RaceManager:
         lap_service = self._get_lap_service()
         return lap_service.get_drivers_average_speed()
 
+    def _get_drivers_lap_after_winner(self, laps):
+        position_service = PositionService(laps)
+        return position_service.get_time_drivers_after_winner()
+
     def show_result(self):
         try:
             last_laps = self._get_last_laps_duration()
@@ -92,6 +96,20 @@ class RaceManager:
                     drive.id,
                     drive.name,
                     "{0:.3f}".format(round(drive.average_speed, 3))
+                ))
+        except ServiceException as e:
+            raise ManagerException(e)
+
+    def show_time_drivers_after_winner(self):
+        try:
+            last_laps = self._get_last_laps_duration()
+            drivers_position_after_winner = self._get_drivers_lap_after_winner(last_laps)  # noqa
+            for position in drivers_position_after_winner:
+                print('{} {} {} {}'.format(
+                    position.driver.id,
+                    position.driver.name,
+                    position.finished_laps,
+                    milliseconds_to_text(position.delay_after_winner)
                 ))
         except ServiceException as e:
             raise ManagerException(e)

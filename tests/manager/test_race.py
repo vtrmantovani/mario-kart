@@ -20,6 +20,7 @@ class TestManagerRace(unittest.TestCase):
 
     def load_fixtures(self):
         self.driver = Driver(1, 'F.MASSA')
+        self.driver_2 = Driver(2, 'K.RAIKKONEN')
 
         self.lap = Lap(
             3661001,
@@ -50,10 +51,7 @@ class TestManagerRace(unittest.TestCase):
 
     @mock.patch('mkart.services.position.PositionService.get_positions')
     def test_get_positions(self, mock_s_position):
-        number = 1
-        finished_laps = 2
-        duration = 60001
-        position = Position(number, self.driver, finished_laps, duration)
+        position = Position(1, self.driver, 1, 60001)
         mock_s_position.return_value = [position]
 
         race_manager = RaceManager('a.log')
@@ -124,5 +122,29 @@ class TestManagerRace(unittest.TestCase):
         with self.assertRaises(ManagerException) as error:
             race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
             race_manager.show_drivers_average_speed()
+
+        self.assertEqual(str(error.exception), 'File is empty')
+
+    @mock.patch('mkart.services.position.PositionService.get_positions')
+    def test_get_drivers_lap_after_winner(self, mock_s_position):
+        position = Position(1, self.driver, 1, 60001)
+        position_2 = Position(2, self.driver_2, 1, 60002)
+        mock_s_position.return_value = [position, position_2]
+
+        race_manager = RaceManager('a.log')
+        result = race_manager._get_drivers_lap_after_winner([])
+        self.assertEqual(type(result[0]), Position)
+        self.assertEqual(result[0].delay_after_winner, 1)
+
+    @mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_show_time_drivers_after_winner(self, mock_stdout):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
+        race_manager.show_time_drivers_after_winner()
+        self.assertEqual(mock_stdout.getvalue(), '033 R.BARRICHELLO 1 0:01.500\n')  # noqa
+
+    def test_show_time_drivers_after_winner_with_expection(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
+            race_manager.show_time_drivers_after_winner()
 
         self.assertEqual(str(error.exception), 'File is empty')
