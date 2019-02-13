@@ -5,6 +5,7 @@ class Position:
         self._driver = driver
         self._finished_laps = finished_laps
         self._duration = duration
+        self._delay_after_winner = 0
 
     @property
     def number(self):
@@ -21,3 +22,11 @@ class Position:
     @property
     def duration(self):
         return self._duration
+
+    @property
+    def delay_after_winner(self):
+        return self._delay_after_winner
+
+    @delay_after_winner.setter
+    def delay_after_winner(self, value):
+        self._delay_after_winner = value

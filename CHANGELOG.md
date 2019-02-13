@@ -35,9 +35,10 @@ Structure of changelog
     - Folders mkart, docs and tests to start the project
 
 #### Changed
+    - Model Position to have the delay_after_winner as an attribute
     - Method milliseconds_to_text on date utils to show duration like log
     - Main file to show drivers average speed lap of race
-    - Model Driver to to have the average_speed as an attribute
+    - Model Driver to have the average_speed as an attribute
     - Main file to show best lap of race
     - Main file to show best drivers lap
     - Refactor Service Position to create Service Lap
