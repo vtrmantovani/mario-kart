@@ -5,3 +5,4 @@ theme: readthedocs
 
 nav:
     - Home: 'index.md'
+    - Version: 'version.md'

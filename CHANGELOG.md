@@ -14,6 +14,7 @@ Structure of changelog
 ### [NEXT_RELEASE]
 
 #### Added
+    - How create a version of project on docs
     - Bumpversion to manager version of project
     - Method show_time_drivers_after_winner on race manager
     - Method show_drivers_average_speed on race manager
