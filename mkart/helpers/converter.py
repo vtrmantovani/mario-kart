@@ -45,7 +45,7 @@ def _create_driver(id, name):
 def convert_text_to_lap(line):
     line_match = re.match(LINE_PATTERN, line)
     if not line_match:
-        raise HelperException('Line {} not match with pattern'.format(line))
+        raise HelperException("Line '{}' not match with pattern".format(line))
 
     driver = _create_driver(
         line_match.group(DRIVER_ID_GROUP),

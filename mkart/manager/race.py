@@ -1,3 +1,4 @@
+from mkart.exceptions.helper import HelperException
 from mkart.exceptions.manager import ManagerException
 from mkart.exceptions.service import ServiceException
 from mkart.helpers.converter import convert_text_to_lap
@@ -11,17 +12,27 @@ class RaceManager:
 
     def __init__(self, file):
         self._file = file
+        self._get_lap_service()
 
     def _get_lines_file(self):
         file_service = FileService(self._file)
         return file_service.get_lines()
 
     def _get_laps(self, lines):
-        return list(map(convert_text_to_lap, lines))
+        try:
+            laps = list(map(convert_text_to_lap, lines))
+            if len(laps) == 0:
+                raise ManagerException("File not match with pattern")
+        except HelperException as e:
+            raise ManagerException(e)
+        return laps
 
     def _get_lap_service(self):
-        lines = self._get_lines_file()
-        laps = self._get_laps(lines)
+        try:
+            lines = self._get_lines_file()
+            laps = self._get_laps(lines)
+        except ServiceException as e:
+            raise ManagerException(e)
         return LapService(laps)
 
     def _get_last_laps_duration(self):
@@ -49,67 +60,52 @@ class RaceManager:
         return position_service.get_time_drivers_after_winner()
 
     def show_result(self):
-        try:
-            last_laps = self._get_last_laps_duration()
-            positions = self._get_positions(last_laps)
+        last_laps = self._get_last_laps_duration()
+        positions = self._get_positions(last_laps)
 
-            for position in positions:
-                print('{} {}-{} {} {}'.format(
-                    position.number,
-                    position.driver.id,
-                    position.driver.name,
-                    position.finished_laps,
-                    milliseconds_to_text(position.duration)
-                ))
-        except ServiceException as e:
-            raise ManagerException(e)
+        for position in positions:
+            print('{} {}-{} {} {}'.format(
+                position.number,
+                position.driver.id,
+                position.driver.name,
+                position.finished_laps,
+                milliseconds_to_text(position.duration)
+            ))
 
     def show_best_drivers_lap(self):
-        try:
-            best_drivers_lap = self._get_best_drivers_lap()
-            for lap in best_drivers_lap:
-                print('{}-{} {} {}'.format(
-                    lap.driver.id,
-                    lap.driver.name,
-                    lap.number,
-                    milliseconds_to_text(lap.duration)
-                ))
-        except ServiceException as e:
-            raise ManagerException(e)
+        best_drivers_lap = self._get_best_drivers_lap()
+        for lap in best_drivers_lap:
+            print('{}-{} {} {}'.format(
+                lap.driver.id,
+                lap.driver.name,
+                lap.number,
+                milliseconds_to_text(lap.duration)
+            ))
 
     def show_best_lap_of_race(self):
-        try:
-            best_lap = self._get_best_lap_of_race()
-            print('{}-{} {}'.format(
-                best_lap.driver.id,
-                best_lap.driver.name,
-                milliseconds_to_text(best_lap.duration)
-            ))
-        except ServiceException as e:
-            raise ManagerException(e)
+        best_lap = self._get_best_lap_of_race()
+        print('{}-{} {}'.format(
+            best_lap.driver.id,
+            best_lap.driver.name,
+            milliseconds_to_text(best_lap.duration)
+        ))
 
     def show_drivers_average_speed(self):
-        try:
-            average_speed_drivers = self._get_drivers_average_speed()
-            for drive in average_speed_drivers:
-                print('{}-{} {}'.format(
-                    drive.id,
-                    drive.name,
-                    "{0:.3f}".format(round(drive.average_speed, 3))
-                ))
-        except ServiceException as e:
-            raise ManagerException(e)
+        average_speed_drivers = self._get_drivers_average_speed()
+        for drive in average_speed_drivers:
+            print('{}-{} {}'.format(
+                drive.id,
+                drive.name,
+                "{0:.3f}".format(round(drive.average_speed, 3))
+            ))
 
     def show_time_drivers_after_winner(self):
-        try:
-            last_laps = self._get_last_laps_duration()
-            drivers_position_after_winner = self._get_drivers_lap_after_winner(last_laps)  # noqa
-            for position in drivers_position_after_winner:
-                print('{}-{} {} {}'.format(
-                    position.driver.id,
-                    position.driver.name,
-                    position.finished_laps,
-                    milliseconds_to_text(position.delay_after_winner)
-                ))
-        except ServiceException as e:
-            raise ManagerException(e)
+        last_laps = self._get_last_laps_duration()
+        drivers_position_after_winner = self._get_drivers_lap_after_winner(last_laps)  # noqa
+        for position in drivers_position_after_winner:
+            print('{}-{} {} {}'.format(
+                position.driver.id,
+                position.driver.name,
+                position.finished_laps,
+                milliseconds_to_text(position.delay_after_winner)
+            ))

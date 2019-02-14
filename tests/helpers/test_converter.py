@@ -41,4 +41,4 @@ class TestHelperConverter(unittest.TestCase):
             line = '1, 4 Joao'
             convert_text_to_lap(line)
 
-        self.assertEqual(str(error.exception), 'Line 1, 4 Joao not match with pattern')  # noqa
+        self.assertEqual(str(error.exception), "Line '1, 4 Joao' not match with pattern")  # noqa

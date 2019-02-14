@@ -29,32 +29,50 @@ class TestManagerRace(unittest.TestCase):
             44.275,
             self.driver)
 
-    @mock.patch('mkart.services.file.FileService._check_file_exists')
-    @mock.patch('mkart.services.file.FileService.get_lines')
-    def test_get_lines_file(self, mock_s_file, mock_s_check):
-        mock_s_file.return_value = ['23:49:08.277']
-        race_manager = RaceManager('a.log')
+    def test_get_lines_file(self):
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         result = race_manager._get_lines_file()
-        self.assertEquals(result, ['23:49:08.277'])
+        self.assertEquals(result, ['23:49:08.277      038 – MARIO                           1\t\t1:02.852                        44,275\n', '23:49:10.858      033 – R.BARRICHELLO                     1\t\t1:04.352                        43,243'])  # noqa
 
     def test_get_laps(self):
         lines = ["23:49:08.277      038 – MARIO                           1		1:02.852                        44,275"]  # noqa
 
-        race_manager = RaceManager('a.log')
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         result = race_manager._get_laps(lines)
         self.assertEqual(type(result[0]), Lap)
+
+    def test_get_laps_with_exception_file_one_line_not_math_with_pattern(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_one_line_not_math_with_pattern.log')  # noqa
+            race_manager._get_lap_service()
+
+        self.assertEqual(str(error.exception), "Line 'wrong' not match with pattern")  # noqa
+
+    def test_get_laps_with_exception_file_not_math_with_pattern(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_not_match_with_pattern.log')  # noqa
+            race_manager._get_lap_service()
+
+        self.assertEqual(str(error.exception), 'File not match with pattern')
 
     def get_lap_service(self):
         race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         result = race_manager._get_lap_service()
         self.assertEqual(type(result), LapService)
 
+    def get_lap_service_with_expection(self):
+        with self.assertRaises(ManagerException) as error:
+            race_manager = RaceManager(self.fixtures_path + '/file_empty.log')
+            race_manager._get_lap_service()
+
+        self.assertEqual(str(error.exception), 'File is empty')
+
     @mock.patch('mkart.services.position.PositionService.get_positions')
     def test_get_positions(self, mock_s_position):
         position = Position(1, self.driver, 1, 60001)
         mock_s_position.return_value = [position]
 
-        race_manager = RaceManager('a.log')
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         result = race_manager._get_positions([])
         self.assertEqual(type(result[0]), Position)
 
@@ -131,7 +149,7 @@ class TestManagerRace(unittest.TestCase):
         position_2 = Position(2, self.driver_2, 1, 60002)
         mock_s_position.return_value = [position, position_2]
 
-        race_manager = RaceManager('a.log')
+        race_manager = RaceManager(self.fixtures_path + '/file_with_laps.log')
         result = race_manager._get_drivers_lap_after_winner([])
         self.assertEqual(type(result[0]), Position)
         self.assertEqual(result[0].delay_after_winner, 1)

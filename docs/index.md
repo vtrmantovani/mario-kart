@@ -46,7 +46,7 @@ Velocidade média da volta (Average lap speed)
     mario-kart -f example.log 
 ```
 
-### Return
+### Example Return Success
 
 ```
 ======RESULT OF KART RACE======
@@ -96,6 +96,17 @@ DRIVER - FINISHED LAPS - TIME
 015-F.ALONSO 4 0:42.643
 011-S.VETTEL 3 6:27.276
 ===============================
+```
+
+### Example Return Erros
+
+```
+* File is empty
+* File not found
+* File not match with pattern
+* Line '{x}' not match with pattern
+
+{x} = Line of file with don't match with pattern
 ```
  
 

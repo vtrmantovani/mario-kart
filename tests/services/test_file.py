@@ -11,10 +11,10 @@ class TestServiceFile(unittest.TestCase):
         self.fixtures_path = os.path.join(os.path.dirname(__file__), '../fixtures')  # noqa
 
     def test_get_lines(self):
-        file = FileService(self.fixtures_path + '/file_ok.log')
+        file = FileService(self.fixtures_path + '/file_with_laps.log')
         result = file.get_lines()
-        self.assertEquals(len(result), 1)
-        self.assertEquals(result[0], 'line 1')
+        self.assertEquals(len(result), 2)
+        self.assertEquals(result[0], '23:49:08.277      038 – MARIO                           1\t\t1:02.852                        44,275\n')  # noqa
 
     def test_get_lines_with_file_not_found(self):
         with self.assertRaises(ServiceException) as error:
