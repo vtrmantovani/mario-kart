@@ -11,7 +11,7 @@ Structure of changelog
 
 ```
 
-### [NEXT_RELEASE]
+### [NEXT_RELEASE] ### [1.0.0] - 2019-02-14
 
 #### Added
     - How create a version of project on docs
